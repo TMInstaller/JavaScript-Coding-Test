@@ -1,7 +1,1 @@
-function solution(strlist) {
-  var answer = [];
-  for (s of strlist) {
-    answer = [...answer, s.length];
-  }
-  return answer;
-}
+const solution = (my_string) => [...new Set(my_string)].join("");
