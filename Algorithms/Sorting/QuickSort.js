@@ -1,3 +1,7 @@
+// QuickSort is a divide-and-conquer algorithm that choose
+// a "pivot" element from the array and partitions the other elements
+// into two sub-arrays, according to whether they are less than or
+// greater than the pivot. The sub-arrays are then sorted recursively.
 function quickSort(arr) {
   if (arr.length <= 1) {
     return arr;
