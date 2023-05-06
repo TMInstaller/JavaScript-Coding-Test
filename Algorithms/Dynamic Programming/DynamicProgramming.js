@@ -2,7 +2,7 @@
 // by breaking them down into smaller subproblems and storing
 // the solutions to these subproblems to avoid redundant computation.
 // The Fibonacci sequence is a classic example of a problem that
-// can be solved using dynamic programming
+// can be solved using dynamic programmings
 
 function fibonacci(n) {
   if (n <= 0) {
