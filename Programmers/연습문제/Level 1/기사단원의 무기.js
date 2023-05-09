@@ -9,15 +9,15 @@ function solution(number, limit, power) {
     // 0과 1은 소수가 아니므로 false로 설정
     isPrime[0] = isPrime[1] = false;
 
-    // 2부터 시작하여 num 범위 내의 소수를 구함
     for (let i = 2; i * i <= num; i++) {
-      if (isPrime[i]) {
-        primes.push(i);
+      // i가 소수일 경우 primes 배열에 추가
+      if (isPrime[i]) primes.push(i);
+      // i가 소수가 아닐 경우 다음 숫자로 건너뜀
+      else continue;
 
-        // 소수의 배수들을 소수가 아닌 것으로 표시
-        for (let j = i * i; j <= num; j += i) {
-          isPrime[j] = false;
-        }
+      // i의 배수를 소수가 아닌 것으로 표시
+      for (let j = i * i; j <= num; j += i) {
+        isPrime[j] = false;
       }
     }
     return primes;
@@ -34,9 +34,7 @@ function solution(number, limit, power) {
     // 소수 목록을 순회하며 소인수 분해를 수행
     for (const prime of primes) {
       // 소수의 제곱이 num보다 클 경우 루프를 빠져나옴
-      if (prime * prime > num) {
-        break;
-      }
+      if (prime * prime > num) break;
 
       let exponent = 0;
       // num이 소수로 나누어 떨어질 때까지 반복
@@ -46,21 +44,15 @@ function solution(number, limit, power) {
       }
 
       // 지수가 0이 아니라면 약수의 개수를 업데이트
-      if (exponent !== 0) {
-        count *= exponent + 1;
-      }
+      if (exponent !== 0) count *= exponent + 1;
     }
 
     // 소인수 분해 후 남은 숫자가 1이 아니라면
     // 마지막 소인수에 대해 약수의 개수를 업데이트
-    if (num !== 1) {
-      count *= 2;
-    }
+    if (num !== 1) count *= 2;
 
-    // 약수의 개수가 limit을 초과하면 power 값으로 치환
-    count = count > limit ? power : count;
-    // 누적 약수 개수를 answer에 더함
-    answer += count;
+    // 약수의 개수가 limit을 초과하면 power 값으로 치환하고 누적
+    answer += count > limit ? power : count;
   }
   return answer;
 }
