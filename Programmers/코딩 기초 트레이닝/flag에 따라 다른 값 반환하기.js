@@ -1,4 +1,1 @@
-function solution(a, b, flag) {
-  var answer = 0;
-  return answer;
-}
+const solution = (a, b, flag) => (flag ? a + b : a - b);
