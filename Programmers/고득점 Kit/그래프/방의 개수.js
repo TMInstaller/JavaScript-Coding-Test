@@ -10,8 +10,8 @@ function solution(arrows) {
   let vertexVisited = new Map();
   let edgeVisited = new Map();
 
-  let x = 0,
-    y = 0;
+  // prettier-ignore
+  let x = 0, y = 0;
   vertexVisited.set(`${x}_${y}`, true);
 
   for (let i = 0; i < arrows.length; i++) {
