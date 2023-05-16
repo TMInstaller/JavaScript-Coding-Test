@@ -22,10 +22,10 @@ function solution(arrows) {
       let ny = y + move[arrows[i]][1]; // 다음 위치의 y 좌표
 
       // 다음 위치에 이미 방문했고, 그리고 해당 간선을 아직 방문하지 않았다면
-      if (
-        vertexVisited.has(`${nx}_${ny}`) &&
-        !edgeVisited.has(`${x}_${y}_${nx}_${ny}`)
-      ) {
+      let isVertexVisited = vertexVisited.has(`${nx}_${ny}`);
+      let isEdgeNotVisited = !edgeVisited.has(`${x}_${y}_${nx}_${ny}`);
+
+      if (isVertexVisited && isEdgeNotVisited) {
         answer++; // 방의 개수를 증가
       }
 
