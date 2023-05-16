@@ -1,63 +1,51 @@
-// Breadth-First Search(BFS)
-// BFS stands for Breadth-First Search, which is a popular
-// algorithm used to traverse and search trees or graphs.
-// It starts at the root node (or a specified node) and visits
-// all the nodes at the current level before moving on to the
-// next level.
+// BFS 알고리즘
+// 1. 시작 노드를 큐에 넣는다.
+// 2. 현재 큐의 노드를 빼서 visited에 추가한다.
+// 3. 현재 방문한 노드와 인접한 노드 중 방문하지 않은 노드를 큐에 넣는다.
+// 4. 큐가 빌 때까지 2~3번 과정을 반복한다.
 
-class Graph {
-  cnostructor() {
-    this.node = [];
-    this.adjacencyList = {};
-  }
+// BFS 알고리즘의 사용 예
+// 1. 두 노드 사이의 최단 경로를 찾고 싶을 때
+// 2. 임의의 경로를 찾고 싶을 때
+// 3. 모든 경로를 탐색하고 싶을 때
 
-  addNode(node) {
-    this.node.push(node);
-    this.adjacencyList[node] = [];
-  }
+// 1번에 대한 예시상황은 다익스트라 알고리즘을 사용하는 것이 더 효율적이다.
+// 2번에 대한 예시상황은 DFS 알고리즘을 사용하는 것이 더 효율적이다.
+// 3번에 대한 예시상황은 BFS 알고리즘을 사용하는 것이 더 효율적이다.
+// 따라서 BFS 알고리즘은 3번에 대한 예시상황에 사용하는 것이 좋다.
 
-  addEdge(node1, node2) {
-    this.adjacencyList[node1].push(node2);
-    this.adjacencyList[node2].push(node1);
-  }
-
-  bfs(start) {
-    const visited = {};
-    const result = [];
-    const queue = [start];
-    visited[start] = true;
-
-    while (queue.length > 0) {
-      const current = queue.shift();
-      result.push(current);
-
-      this.adjacencyList[current].forEach((neighbor) => {
-        if (!visited[neighbor]) {
-          visited[neighbor] = true;
-          queue.push(neighbor);
-        }
-      });
+// 인접 리스트를 이용한 BFS 구현
+// 이 알고리즘은 bfs를 이용하여 그래프를 탐색하고 결과를 배열로 반환한다.
+// 결과는 시작 노드부터 탐색한 순서대로 배열에 담아 반환한다.
+function bfs(graph, start) {
+  const visited = [];
+  const queue = [start];
+  while (queue.length > 0) {
+    const n = queue.shift();
+    if (!visited.includes(n)) {
+      visited.push(n);
+      const sub = graph[n].filter((v) => !visited.includes(v));
+      for (let i of sub) {
+        queue.push(i);
+      }
     }
-
-    return result;
   }
+  return visited;
 }
 
-const graph = new Graph();
+const graph = {
+  A: ["B", "C"],
+  B: ["A", "D"],
+  C: ["A", "G", "H", "I"],
+  D: ["B", "E", "F"],
+  E: ["D"],
+  F: ["D"],
+  G: ["C"],
+  H: ["C"],
+  I: ["C", "J"],
+  J: ["I"],
+};
 
-graph.addNode("A");
-graph.addNode("B");
-graph.addNode("C");
-graph.addNode("D");
-graph.addNode("E");
-graph.addNode("F");
-
-graph.addEdge("A", "B");
-graph.addEdge("A", "C");
-graph.addEdge("B", "D");
-graph.addEdge("C", "E");
-graph.addEdge("D", "E");
-graph.addEdge("D", "F");
-graph.addEdge("E", "F");
-
-console.log(graph.bfs("A"));
+// 아래 로그는 BFS 알고리즘을 적용한 결과입니다.
+console.log(bfs(graph, "A"));
+// A, B, C, D, G, H, I, E, F, J
