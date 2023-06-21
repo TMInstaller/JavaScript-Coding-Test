@@ -1,8 +1,7 @@
 let fs = require("fs");
 let input = fs.readFileSync("/dev/stdin").toString().split("\n");
 
-let presentTime = Number(input[0].split(" ")[0]);
-let presentMinute = Number(input[0].split(" ")[1]);
+let [presentTime, presentMinute] = input[0].split(" ").map(Number);
 let cookingTime = Number(input[1].split(" ")[0]);
 
 function duckCooking(presentTime, presentMinute, cookingTime) {
