@@ -1,19 +1,20 @@
-function solution(numbers, target) {
-  let count = 0;
+const solution = (numbers, target) => {
+  let answer = 0;
+  const len = numbers.length;
 
-  function dfs(index, sum) {
-    if (index === numbers.length) {
-      if (sum === target) {
-        count++;
+  const dfs = (count, sum) => {
+    if (count === len) {
+      if (target === sum) {
+        answer += 1;
       }
       return;
     }
 
-    dfs(index + 1, sum + numbers[index]);
-    dfs(index + 1, sum - numbers[index]);
-  }
+    dfs(count + 1, sum + numbers[count]);
+    dfs(count + 1, sum - numbers[count]);
+  };
 
   dfs(0, 0);
 
-  return count;
-}
+  return answer;
+};
